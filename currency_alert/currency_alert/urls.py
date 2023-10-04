@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Main.views import front
+from Main.views import front,signup,currency
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',front,name="front"),
+    path('signup/',signup,name='signup'),
+    path('currency/<int:user_id>',currency,name='currency'),
 ]
