@@ -36,36 +36,7 @@ def signup(request):
 
 
 def currency(request, user_id):
-    exchange_rate = 0.0 
-
-    if request.method == 'POST':
-        base_value = request.POST.get('base_value')
-        base_currency = request.POST.get('base_currency')
-        to_currency = request.POST.get('to_currency')
-
-        url = "https://currency-exchange.p.rapidapi.com/exchange"
-        querystring = {
-            "from": str(base_currency),
-            "to": str(to_currency),
-            "q": str(base_value)
-        }
-
-        headers = {
-            "X-RapidAPI-Key": "2be85388b9msh873d41f7f0cb2c7p127ef4jsn34f1e34ec9c2",
-            "X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"
-        }
-
-        response = requests.get(url, headers=headers, params=querystring)
-
-        if response.status_code == 200:
-            data = response.json()
-            exchange_rate=float(data)
-            print(exchange_rate)
-            return render(request, "currency.html", {'user_id': user_id, 'currencies': currencies, 'response': exchange_rate})
-        else:
-            exchange_rate = 0.0
-
-    return render(request, "currency.html", {'user_id': user_id, 'currencies': currencies, 'response': exchange_rate})
+    return render(request, "currency.html", {'user_id': user_id, 'currencies': currencies})
 
 def send_Mail(request):
     send_mail_()
