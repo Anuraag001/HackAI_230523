@@ -1,0 +1,38 @@
+html,body{
+    background-color: rgb(1, 1, 88);
+    display: flex;
+    flex:0 0 100%;
+    height: 100%;
+    width: 100%;
+}
+#qwe
+{
+    display: flex;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+#main
+{
+    background-color: white;
+    border-radius: 25px;
+    padding: 20px;
+    flex: 0 0 100%;
+    box-sizing:initial;
+}
+#mnb
+{
+    text-align: center;
+    font-size: x-large;
+}
+#zx
+{
+    display: flex;  
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
