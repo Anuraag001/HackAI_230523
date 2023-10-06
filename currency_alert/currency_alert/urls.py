@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Main.views import front,signup,currency,send_Mail,convert
+from Main.views import front,signup,currency,send_Mail,convert,alert,create_alert
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,6 @@ urlpatterns = [
     path('currency/<int:user_id>',currency,name='currency'),
     path('send_mail/',send_Mail,name='send_Mail'),
     path('convert/<int:user_id>',convert,name='convert'),
+    path('alert/',alert,name='alert'),
+     path('create_alert/',create_alert,name='create_alert'),
 ]

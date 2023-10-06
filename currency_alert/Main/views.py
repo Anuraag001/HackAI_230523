@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
-from .models import Customer
+from .models import Customer,Alert
 from .utils import send_mail_
 from uagents import Agent, Context
 import requests
@@ -55,3 +55,22 @@ def convert(request,user_id):
     print(response.json())
     return render(request,"currency.html",{'user_id':user_id})
 
+def alert(request):
+    return render(request,"alert.html",{"currencies":currencies})
+
+def create_alert(request):
+    if request.method == 'POST':
+        base_currency = request.POST.get('base_currency')
+        min_amount = request.POST.get('min_amount')
+        max_amount = request.POST.get('max_amount')
+        to_currency = request.POST.get('to_currency')
+        print(min_amount)
+        print(max_amount)
+        print(base_currency)
+        print(to_currency)
+        alert = Alert(base_currency=base_currency, min_amount=min_amount, max_amount=max_amount, to_currency=to_currency)
+        alert.save()
+
+        return render(request, 'success.html')  # Create a success page or redirect as needed
+
+    return render(request, 'create_alert.html')
