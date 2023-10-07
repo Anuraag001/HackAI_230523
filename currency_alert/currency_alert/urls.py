@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Main.views import front,signup,currency,send_Mail,convert,alert,create_alert,screen
+from Main.views import front,signup,currency,send_Mail,convert,alert,create_alert,screen,threshold,run
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +28,6 @@ urlpatterns = [
     path('alert/',alert,name='alert'),
     path('create_alert/',create_alert,name='create_alert'),
     path('screen/',screen,name="screen"),
+    path('threshold/<int:user_id>/',threshold,name="threshold"),
+    path('run/<int:user_id>/',run,name="run"),
 ]
