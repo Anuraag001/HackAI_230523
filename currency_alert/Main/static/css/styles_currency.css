@@ -1,3 +1,12 @@
+html{
+    cursor: url('../img/cursor.png'),auto;
+}
+
+input[type="text"],
+textarea {
+    cursor: url('../img/navigation.png'), auto;
+}
+
 body
 {
     background-color: rgb(1, 1, 88);
@@ -22,26 +31,84 @@ body
     color: white;
 
 }
+
+#select_box{
+    display: flex;
+    flex-direction: column;
+    flex:0 0 100%;
+}
+
 #iop
 {
+    display: flex;
+    flex-direction: column;
+    flex:0 0 40%;
     width: 40%;
 }
 #as
 {
     color: white;
+    display: flex;
+    flex:0 0 20%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#ab{
+    color: white;
+    display: flex;
+    flex:0 0 20%;
+    flex-direction: row;
+    justify-content: center;
 }
 #df
 {
+    display: flex;
+    flex-direction: column;
+    flex:0 0 40%;
     float:right;
     align-items:stretch;
 }
 #main
 {
     display: flex;
+    flex:0 0 100%;
     flex-direction: row;
     justify-content: space-evenly;
 }
 #main1
 {
-    align-items: flex-end;
+    display: flex;
+    flex:0 0 20%;
+    align-items: center;
+    justify-content: center;
+
 }
+
+#show{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+/* Custom CSS for the transparent input */
+.transparent-input {
+    background: transparent; /* Make the background transparent */
+    border: none; /* Remove the border on the top, left, and right */
+    border-bottom: 2px solid white; /* Add a bottom border */
+    color: white !important; /* Set the text color to white */
+    padding: 10px 0; /* Add padding to center the text vertically */
+    outline: none;
+    box-shadow: none;
+    text-align: center;
+}
+
+/* Add a background color on focus */
+.transparent-input:focus {
+    background-color: rgb(1, 1, 88); /* Background color when focused */
+    border-color:rgb(1, 1, 88);
+    border-bottom: 2px solid white; /* Add a bottom border when focused */
+}
+

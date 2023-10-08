@@ -130,3 +130,5 @@ EMAIL_HOST_USER = 'convertnotifyruppee@gmail.com'
 EMAIL_HOST_PASSWORD = 'tbjabiepkgzdezyt'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+

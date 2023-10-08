@@ -11,47 +11,59 @@
 <body>
     <h1 id="qwer">Currency Converter</h1>
     <br><br>
-<div id="main">
-    <div id="iop">
-        <h5 id="as">From</h5>
-        <select name="base_currency" class="form-select" id="form-select-base" aria-label="Default select example" >
-            <option selected >Currency to convert from</option>
-            {% for currency in currencies %}
-                <option value="{{ currency }}">{{ currency }}</option>
-            {% endfor %}
-        </select>
-        <br>
-    <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label" id="tyu">Amount in Base Currency</label>
-            <input type="text" name="base_value" class="form-control" id="formGroupExampleInput" placeholder="Amount in Base Currency">
-    </div>
-    </div>
-    <div id="main1">
-        <button type="submit" class="btn btn-primary" onclick="call_me()">Convert</button>
-    </div>
-        <br><br>
-    <div class="mb-3" id="df">
-            <h5 id="as">To</h5>
-            <select name="to_currency" class="form-select" id="form-select-to" iaria-label="Default select example">
-                <option selected>Currency to convert to</option>
+    <div id="main">
+        <div id="iop">
+            <div id="as">From</div>
+            <select name="base_currency" class="form-select" id="form-select-base" aria-label="Default select example">
+                <option selected >Currency to convert from</option>
                 {% for currency in currencies %}
                     <option value="{{ currency }}">{{ currency }}</option>
                 {% endfor %}
             </select>
-            <br><br>
+            <br>
+            <div class="form-group">
+                <input type="text" name="base_value" class="form-control transparent-input" id="formGroupExampleInput" placeholder="Amount in Base Currency">
+            </div>
+            
+            
+        </div>
+        <div id="main1">
+            <button type="submit" class="btn btn-primary" onclick="call_me()" id="round-button"><img src="{% static 'img/exchange.png' %}" alt=""></button>
+        </div>
+        <br><br>
+        <div class="mb-3" id="df">
+            <div id="as">To</div>
+            <div id="ab">
+                <select name="to_currency" class="form-select" id="form-select-to" aria-label="Default select example">
+                    <option selected>Currency to convert to</option>
+                    {% for currency in currencies %}
+                        <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
             <div id="show" style="color:white"></div>
+        </div>
     </div>
-</div>
-        <br>
-    
+    <br>
     <br>  
-    <a href="{% url 'threshold' user_id=user_id %}"><button>Go To threshold</button></a>
+    <a href="{% url 'threshold' user_id=user_id %}" class="btn btn-primary">Go To threshold</a>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/exchange.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-</body>
-
+    <script>
+        // Add a JavaScript event listener to toggle the background color on focus
+        document.querySelector('.transparent-input').addEventListener('focus', function () {
+            this.style.backgroundColor = 'rgb(1, 1, 88)';
+        });
+    
+        // Add an event listener to revert to the transparent background on blur (optional)
+        document.querySelector('.transparent-input').addEventListener('blur', function () {
+            this.style.backgroundColor = 'transparent';
+        });
+    </script>
+    
 </body>
 </html>
