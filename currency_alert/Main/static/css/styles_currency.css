@@ -1,0 +1,47 @@
+body
+{
+    background-color: rgb(1, 1, 88);
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+#qwer
+{
+    text-align: center;
+    font-size:xx-large;
+    color: white;
+}
+
+.mb-3
+{
+    width: 40%;
+
+}
+#tyu
+{
+    color: white;
+
+}
+#iop
+{
+    width: 40%;
+}
+#as
+{
+    color: white;
+}
+#df
+{
+    float:right;
+    align-items:stretch;
+}
+#main
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#main1
+{
+    align-items: flex-end;
+}

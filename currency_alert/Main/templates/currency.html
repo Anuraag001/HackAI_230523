@@ -5,41 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles_currency.css' %}">
     <title>Currency</title>
 </head>
 <body>
-        <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">Base Currency</label>
-            <input type="text" name="base_value" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
-        </div>
-        <select name="base_currency" class="form-select" id="form-select-base" aria-label="Default select example">
-            <option selected>Select base Currency</option>
+    <h1 id="qwer">Currency Converter</h1>
+    <br><br>
+<div id="main">
+    <div id="iop">
+        <h5 id="as">From</h5>
+        <select name="base_currency" class="form-select" id="form-select-base" aria-label="Default select example" >
+            <option selected >Currency to convert from</option>
             {% for currency in currencies %}
                 <option value="{{ currency }}">{{ currency }}</option>
             {% endfor %}
         </select>
-    
+        <br>
+    <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label" id="tyu">Amount in Base Currency</label>
+            <input type="text" name="base_value" class="form-control" id="formGroupExampleInput" placeholder="Amount in Base Currency">
+    </div>
+    </div>
+    <div id="main1">
+        <button type="submit" class="btn btn-primary" onclick="call_me()">Convert</button>
+    </div>
         <br><br>
-        <div class="mb-3">
-            currency to convert
+    <div class="mb-3" id="df">
+            <h5 id="as">To</h5>
             <select name="to_currency" class="form-select" id="form-select-to" iaria-label="Default select example">
-                <option selected>Select to convert currency</option>
+                <option selected>Currency to convert to</option>
                 {% for currency in currencies %}
                     <option value="{{ currency }}">{{ currency }}</option>
                 {% endfor %}
             </select>
-        </div>
+            <br><br>
+            <div id="show" style="color:white">57547445</div>
+    </div>
+</div>
         <br>
-        <button type="submit" class="btn btn-primary" onclick="call_me()">Convert</button>
-    <div id="show"></div>
     
+    <br>  
     <a href="{% url 'threshold' user_id=user_id %}"><button>Go To threshold</button></a>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/exchange.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-  </body>
+</body>
 
 </body>
 </html>
