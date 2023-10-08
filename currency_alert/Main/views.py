@@ -13,12 +13,25 @@ from agent import *
 # Create your views here.
 currencies=['SGD', 'MYR', 'EUR', 'USD', 'AUD', 'JPY', 'CNH', 'HKD', 'CAD', 'INR', 'DKK', 'GBP', 'RUB', 'NZD', 'MXN', 'IDR', 'TWD', 'THB', 'VND']
 
+first_string=f'''from uagents import Agent, Context,Bureau
+import requests
+bureau=Bureau()
+from Main.utils import *
+'''
+
 def front(request):
     if request.method=='POST':
         email=request.POST.get('email')
         password=request.POST.get('password')
         user=User.objects.get(email=email)
         if check_password(password, user.password):
+            with open("agent.py", "w") as file:
+                file.write(first_string)
+            file.close()
+            all_agents=User_Agent.objects.filter(user=user)
+            for agent in all_agents:
+                check(agent)
+        
             print("user logged in")
             return redirect('currency',user_id=user.id)
     return render(request,"temp.html")
@@ -117,17 +130,34 @@ def add_to_bureau(name):
     bureau.add(new_agent)
     return 
 
-def check(name):
+def check(agent):
+    
     my_string = f'''
-{name} = Agent(name="{name}", seed="{name} recovery phrase")
+{agent.name} = Agent(name="{agent.name}", seed="{agent.name} recovery phrase")
 
-@{name}.on_interval(period=2.0)
+@{agent.name}.on_interval(period=2.0)
 async def say_hello(ctx: Context):
-    ctx.logger.info(f'hello, my name is {{ctx.name}}')
+    url = "https://currency-exchange.p.rapidapi.com/exchange"
 
-def run_{name}():
-    {name}.run()
-bureau.add({name})
+    querystring = {{"from": "{agent.base_currency}", "to": "{agent.foreign_currency}", "q": "1.0"}}
+
+    headers = {{
+        "X-RapidAPI-Key": "2be85388b9msh873d41f7f0cb2c7p127ef4jsn34f1e34ec9c2",
+        "X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"
+    }}
+
+    response = requests.get(url, headers=headers, params=querystring)
+    ctx.storage.set("present", response.json())
+    ctx.storage.set("max_value", {agent.max_value})
+    ctx.storage.set("min_value", {agent.min_value})
+    if ctx.storage.get("present")>ctx.storage.get("max_value") or ctx.storage.get("present")<ctx.storage.get("min_value"):
+        ctx.logger.info(f'\\033[91mNot in range\\033[0m')
+    else:
+        ctx.logger.info(f'\\033[94mIn range\\033[0m')
+
+def run_{agent.name}():
+    {agent.name}.run()
+bureau.add({agent.name})
 '''
     print(my_string)
     with open("agent.py", "a") as file:
@@ -152,7 +182,7 @@ def threshold(request,user_id):
         agent=User_Agent.objects.create(user=user,name=name,base_currency=base_currency,min_value=min_amount,max_value=max_amount,foreign_currency=to_currency)
         agent.save()
         #my_thread.start()
-        check(name)
+        check(agent)
         #add_to_bureau(name)
         #add_to_bureau(name)
     all_agents=User_Agent.objects.filter(user=user)
