@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Agent</title>
     <!-- Include Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Jnujsl5+z1E2j5eabftr/Uw5P03B/z4f+SD5v2F5P07bJQf" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles_agent.css' %}">
 </head>
 <body>
@@ -17,16 +17,16 @@
                 <div id="tyu">
                 <div class="mb-3">
                     <label for="name" class="form-label" id="qwer">Name : </label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" required><br>  
                 </div>
     
                 <select name="base_currency" class="form-select" id="form-select-base" aria-label="Default select example">
-                    <option selected>Select base Currency</option>
+                    <option selected>Select base Currency</option> 
                     {% for currency in currencies %}
                         <option value="{{ currency }}">{{ currency }}</option>
                     {% endfor %}
                 </select>
-    
+                <br>
                 <div class="mb-3">
                     <label for="min_value" class="form-label" id="qwer">Minimum Value : </label>
                     <input type="number" class="form-control" id="min_value" name="min_value" step="0.01" required>
@@ -35,6 +35,7 @@
                     <label for="max_value" class="form-label" id="qwer">Maximum Value : </label>
                     <input type="number" class="form-control" id="max_value" name="max_value" step="0.01" required>
                 </div>
+                <br>
                 <select name="to_currency" class="form-select" id="form-select-to" iaria-label="Default select example">
                     <option selected>Select to convert currency</option>
                     {% for currency in currencies %}
@@ -44,7 +45,8 @@
             </div>
             <br>
                 <div id="io">
-                <button type="submit" class="btn btn-primary">Create Agent</button>
+                <button type="submit" class="btn btn-primary"><img src="{% static 'img/plus_symbol.png' %}" height="30px" width="30px"></button>
+                <div id="fgh"><p>Add Agent</p></div>
             </div>
             
             </form>
@@ -58,8 +60,8 @@
             <p>Foreign Currency: {{ agent.foreign_currency }}</p>
             
         </div> -->
-        <div id="tab">
-    <table>
+        <div >
+    <table class="table table-hover">
         <thead>
           <tr>
             <th>Agents</th>
@@ -67,6 +69,7 @@
             <th>To Currency</th>
             <th>Minimum Value</th>
             <th>Maximum Value</th>
+            <th>Remove</th>
           </tr>
         </thead>
         <tbody>
@@ -77,15 +80,22 @@
             <td>{{ agent.foreign_currency }}</td>
             <td>{{ agent.min_value }}</td>
             <td>{{ agent.max_value }}</td>
+            <td>
+                <button type="button" class="btn btn-danger">Remove</button>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
     </div>
-    <a href="{% url 'run' user_id=user_id %}"><button>run</button></a>
+    <div id="run">
+    <a href="{% url 'run' user_id=user_id %}"><button type="button" class="btn btn-success">Run</button></a>
+    </div>
     <!-- Include Bootstrap JS and Popper.js for form validation -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Jnujsl5+z1E2j5eabftr/Uw5P03B/z4f+SD5v2F5P07bJQf" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-KEYmT5qz2f5q0Rx5RjD5z5me5F9D5t6zjoIPWy8jHPwuPj2FkC6LZiLyh5foGlKz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 </html>
