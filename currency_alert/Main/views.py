@@ -241,3 +241,10 @@ def password_reset_email(request):
 
 def password_reset_confirm(request):
     return render(request, "password_reset_confirm.html")
+
+
+def nice(request):
+    return render(request, "nice.html")
+
+def nice1(request):
+    return render(request, "nice1.html")
