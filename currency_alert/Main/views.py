@@ -5,6 +5,8 @@ from .models import Customer,Alert,User_Agent
 from .utils import send_mail_
 from uagents import Agent, Context,Bureau
 import time
+import os
+import fnmatch
 import requests
 import asyncio
 from threading import Thread
@@ -18,13 +20,35 @@ import requests
 bureau=Bureau()
 from Main.utils import *
 '''
+def remove():
+    # Get the directory where the script is located
+    script_directory = os.path.dirname(os.path.abspath(__file__))
 
+# Navigate to the parent directory
+    parent_directory = os.path.join(script_directory, '..')
+
+# Pattern to match filenames (e.g., files starting with "agent")
+    pattern = 'agent*'
+
+# Get a list of files matching the pattern in the parent directory
+    matching_files = fnmatch.filter(os.listdir(parent_directory), pattern)
+
+# Iterate through the matching files and delete them
+    for file_name in matching_files:
+        file_path = os.path.join(parent_directory, file_name)
+        try:
+            os.remove(file_path)
+            print(f"Deleted: {file_path}")
+        except Exception as e:
+            print(f"Error deleting {file_path}: {str(e)}")
+    
 def front(request):
     if request.method=='POST':
         email=request.POST.get('email')
         password=request.POST.get('password')
         user=User.objects.get(email=email)
         if check_password(password, user.password):
+            remove()
             with open("agent.py", "w") as file:
                 file.write(first_string)
             file.close()
@@ -49,6 +73,10 @@ def signup(request):
         customer.save()
         user.save()
         print("user created")
+        remove()
+        with open("agent.py", "w") as file:
+                file.write(first_string)
+        file.close()
         return redirect('currency',user_id=user.id)
     return render(request,"signup.html")
 
@@ -150,8 +178,13 @@ async def say_hello(ctx: Context):
     ctx.storage.set("present", response.json())
     ctx.storage.set("max_value", {agent.max_value})
     ctx.storage.set("min_value", {agent.min_value})
+    boolean=ctx.storage.get("value") or False
     if ctx.storage.get("present")>ctx.storage.get("max_value") or ctx.storage.get("present")<ctx.storage.get("min_value"):
         ctx.logger.info(f'\\033[91mNot in range\\033[0m')
+        if not boolean:
+            send_mail_()
+            ctx.storage.set("value",True)
+            boolean=ctx.storage.get("value")
     else:
         ctx.logger.info(f'\\033[94mIn range\\033[0m')
 
