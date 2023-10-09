@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,52 +7,82 @@
     <title>Create Agent</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Jnujsl5+z1E2j5eabftr/Uw5P03B/z4f+SD5v2F5P07bJQf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles_agent.css' %}">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Create Agent</h1>
-        <form method="POST" action="{% url 'threshold' user_id=user_id %}">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+    <div class="container mt-5" id="mn">
+        <h1 class="lk" id="qwer">Add a Limit</h1>
+            <form method="POST" action="{% url 'threshold' user_id=user_id %}">
+                {% csrf_token %}
+                <div id="tyu">
+                <div class="mb-3">
+                    <label for="name" class="form-label" id="qwer">Name : </label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+    
+                <select name="base_currency" class="form-select" id="form-select-base" aria-label="Default select example">
+                    <option selected>Select base Currency</option>
+                    {% for currency in currencies %}
+                        <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+    
+                <div class="mb-3">
+                    <label for="min_value" class="form-label" id="qwer">Minimum Value : </label>
+                    <input type="number" class="form-control" id="min_value" name="min_value" step="0.01" required>
+                </div>
+                <div class="mb-3">
+                    <label for="max_value" class="form-label" id="qwer">Maximum Value : </label>
+                    <input type="number" class="form-control" id="max_value" name="max_value" step="0.01" required>
+                </div>
+                <select name="to_currency" class="form-select" id="form-select-to" iaria-label="Default select example">
+                    <option selected>Select to convert currency</option>
+                    {% for currency in currencies %}
+                        <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
             </div>
-
-            <select name="base_currency" class="form-select" id="form-select-base" aria-label="Default select example">
-                <option selected>Select base Currency</option>
-                {% for currency in currencies %}
-                    <option value="{{ currency }}">{{ currency }}</option>
-                {% endfor %}
-            </select>
-
-            <div class="mb-3">
-                <label for="min_value" class="form-label">Minimum Value</label>
-                <input type="number" class="form-control" id="min_value" name="min_value" step="0.01" required>
+            <br>
+                <div id="io">
+                <button type="submit" class="btn btn-primary">Create Agent</button>
             </div>
-            <div class="mb-3">
-                <label for="max_value" class="form-label">Maximum Value</label>
-                <input type="number" class="form-control" id="max_value" name="max_value" step="0.01" required>
-            </div>
-            <select name="to_currency" class="form-select" id="form-select-to" iaria-label="Default select example">
-                <option selected>Select to convert currency</option>
-                {% for currency in currencies %}
-                    <option value="{{ currency }}">{{ currency }}</option>
-                {% endfor %}
-            </select>
-            <button type="submit" class="btn btn-primary">Create Agent</button>
-        </form>
-    </div>
+            
+            </form>
 
-    {% for agent in all_agents %}
-        <div class="container mt-5">
+            <br><br>
+        <!-- <div class="container mt-5">
             <h1>Agent: {{ agent.name }}</h1>
             <p>Base Currency: {{ agent.base_currency }}</p>
             <p>Minimum Value: {{ agent.min_value }}</p>
             <p>Maximum Value: {{ agent.max_value }}</p>
             <p>Foreign Currency: {{ agent.foreign_currency }}</p>
             
-        </div>
-    {% endfor %}
+        </div> -->
+        <div id="tab">
+    <table>
+        <thead>
+          <tr>
+            <th>Agents</th>
+            <th>From Currency</th>
+            <th>To Currency</th>
+            <th>Minimum Value</th>
+            <th>Maximum Value</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for agent in all_agents %}
+          <tr>
+            <td>{{ agent.name }}</td>
+            <td>{{ agent.base_currency }}</td>
+            <td>{{ agent.foreign_currency }}</td>
+            <td>{{ agent.min_value }}</td>
+            <td>{{ agent.max_value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </div>
     <a href="{% url 'run' user_id=user_id %}"><button>run</button></a>
     <!-- Include Bootstrap JS and Popper.js for form validation -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Jnujsl5+z1E2j5eabftr/Uw5P03B/z4f+SD5v2F5P07bJQf" crossorigin="anonymous"></script>
