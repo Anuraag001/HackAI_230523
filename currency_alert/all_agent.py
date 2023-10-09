@@ -2,6 +2,7 @@ from uagents import Agent, Context,Bureau
 import requests
 bureau=Bureau()
 from Main.utils import *
+from django.conf import settings
 
 a = Agent(name="a", seed="a recovery phrase")
 
@@ -12,8 +13,8 @@ async def say_hello(ctx: Context):
     querystring = {"from": "USD", "to": "INR", "q": "1.0"}
 
     headers = {
-        "X-RapidAPI-Key": "2be85388b9msh873d41f7f0cb2c7p127ef4jsn34f1e34ec9c2",
-        "X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"
+        'X-RapidAPI-Key': settings.RAPIDAPI_KEY,
+    'X-RapidAPI-Host': settings.RAPIDAPI_HOST,
     }
 
     response = requests.get(url, headers=headers, params=querystring)
@@ -43,8 +44,8 @@ async def say_hello(ctx: Context):
     querystring = {"from": "USD", "to": "INR", "q": "1.0"}
 
     headers = {
-        "X-RapidAPI-Key": "2be85388b9msh873d41f7f0cb2c7p127ef4jsn34f1e34ec9c2",
-        "X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"
+        'X-RapidAPI-Key': settings.RAPIDAPI_KEY,
+    'X-RapidAPI-Host': settings.RAPIDAPI_HOST,
     }
 
     response = requests.get(url, headers=headers, params=querystring)

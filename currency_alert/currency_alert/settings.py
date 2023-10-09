@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from django.core.mail import send_mail
+from decouple import config
+
+
+# Define your API key and host
+RAPIDAPI_KEY = config('RAPIDAPI_KEY')
+RAPIDAPI_HOST = config('RAPIDAPI_HOST')
+EMAIL_HOST_PASS=config('EMAIL_HOST_PASS')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,7 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'convertnotifyruppee@gmail.com'
-EMAIL_HOST_PASSWORD = 'tbjabiepkgzdezyt'
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASS
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

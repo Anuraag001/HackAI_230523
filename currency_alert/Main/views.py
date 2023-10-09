@@ -11,6 +11,7 @@ import requests
 import asyncio
 from threading import Thread
 from all_agent import *
+from django.conf import settings
 #from django.auth.models import User
 # Create your views here.
 currencies=['SGD', 'MYR', 'EUR', 'USD', 'AUD', 'JPY', 'CNH', 'HKD', 'CAD', 'INR', 'DKK', 'GBP', 'RUB', 'NZD', 'MXN', 'IDR', 'TWD', 'THB', 'VND']
@@ -19,6 +20,7 @@ first_string=f'''from uagents import Agent, Context,Bureau
 import requests
 bureau=Bureau()
 from Main.utils import *
+from django.conf import settings
 '''
 def remove():
     # Get the directory where the script is located
@@ -92,8 +94,8 @@ def convert(request,user_id):
     url = "https://currency-exchange.p.rapidapi.com/listquotes"
 
     headers = {
-	"X-RapidAPI-Key": "2be85388b9msh873d41f7f0cb2c7p127ef4jsn34f1e34ec9c2",
-	"X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"
+	'X-RapidAPI-Key': settings.RAPIDAPI_KEY,
+    'X-RapidAPI-Host': settings.RAPIDAPI_HOST,
     }
 
     response = requests.get(url, headers=headers)
@@ -170,8 +172,8 @@ async def say_hello(ctx: Context):
     querystring = {{"from": "{agent.base_currency}", "to": "{agent.foreign_currency}", "q": "1.0"}}
 
     headers = {{
-        "X-RapidAPI-Key": "2be85388b9msh873d41f7f0cb2c7p127ef4jsn34f1e34ec9c2",
-        "X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"
+        'X-RapidAPI-Key': settings.RAPIDAPI_KEY,
+    'X-RapidAPI-Host': settings.RAPIDAPI_HOST,
     }}
 
     response = requests.get(url, headers=headers, params=querystring)
