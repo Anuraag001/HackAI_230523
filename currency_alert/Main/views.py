@@ -10,7 +10,7 @@ import fnmatch
 import requests
 import asyncio
 from threading import Thread
-from agent import *
+from all_agent import *
 #from django.auth.models import User
 # Create your views here.
 currencies=['SGD', 'MYR', 'EUR', 'USD', 'AUD', 'JPY', 'CNH', 'HKD', 'CAD', 'INR', 'DKK', 'GBP', 'RUB', 'NZD', 'MXN', 'IDR', 'TWD', 'THB', 'VND']
@@ -49,7 +49,7 @@ def front(request):
         user=User.objects.get(email=email)
         if check_password(password, user.password):
             remove()
-            with open("agent.py", "w") as file:
+            with open("all_agent.py", "w") as file:
                 file.write(first_string)
             file.close()
             all_agents=User_Agent.objects.filter(user=user)
@@ -74,7 +74,7 @@ def signup(request):
         user.save()
         print("user created")
         remove()
-        with open("agent.py", "w") as file:
+        with open("all_agent.py", "w") as file:
                 file.write(first_string)
         file.close()
         return redirect('currency',user_id=user.id)
@@ -193,7 +193,7 @@ def run_{agent.name}():
 bureau.add({agent.name})
 '''
     print(my_string)
-    with open("agent.py", "a") as file:
+    with open("all_agent.py", "a") as file:
         file.write(my_string)
     file.close()
     return
