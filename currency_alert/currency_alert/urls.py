@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Main.views import front,signup,currency,send_Mail,convert,alert,create_alert,screen,threshold,run
+from Main.views import front,signup,currency,send_Mail,convert,alert,create_alert,screen,threshold,run,forgot_password,password_reset_email,password_reset_confirm
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,7 @@ urlpatterns = [
     path('screen/',screen,name="screen"),
     path('threshold/<int:user_id>/',threshold,name="threshold"),
     path('run/<int:user_id>/',run,name="run"),
+    path('forgot_password',forgot_password,name="forgot_password"),
+    path('password_reset_email',password_reset_email,name="password_reset_email"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 ]

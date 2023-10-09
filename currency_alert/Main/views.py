@@ -9,6 +9,7 @@ import requests
 import asyncio
 from threading import Thread
 from agent import *
+from django.contrib.auth.views import PasswordResetConfirmView
 #from django.auth.models import User
 # Create your views here.
 currencies=['SGD', 'MYR', 'EUR', 'USD', 'AUD', 'JPY', 'CNH', 'HKD', 'CAD', 'INR', 'DKK', 'GBP', 'RUB', 'NZD', 'MXN', 'IDR', 'TWD', 'THB', 'VND']
@@ -56,8 +57,8 @@ def signup(request):
 def currency(request, user_id):
     return render(request, "currency.html", {'user_id': user_id, 'currencies': currencies})
 
-def send_Mail(request):
-    send_mail_()
+def send_Mail(email):
+    send_mail_(email)
     return render(request,"temp.html")
 
 def convert(request,user_id):
@@ -194,3 +195,14 @@ def run(request,user_id):
     print(bureau)
     return render(request, 'success.html')
 
+def forgot_password(request):
+    if request.method == 'POST':
+        email=request.POST.get('email')
+        send_mail_(email)
+    return render(request,'forgot_password.html')
+
+def password_reset_email(request):
+    render(request,"password_reset_email.html")
+
+def password_reset_confirm(request):
+    return render(request, "password_reset_confirm.html")

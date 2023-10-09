@@ -32,3 +32,7 @@ class Alert(models.Model):
 
     def __str__(self):
         return f"{self.base_currency} - {self.min_amount} to {self.max_amount} ({self.to_currency})"
+    
+class Forget(models.Model):
+    user = models.OneToOneField(User , on_delete=models.CASCADE)
+    forget_password_token = models.CharField(max_length=100,null=True)

@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Customer)
 admin.site.register(Alert)
 admin.site.register(User_Agent)
+admin.site.register(Forget)
