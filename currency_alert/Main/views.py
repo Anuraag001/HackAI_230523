@@ -13,6 +13,7 @@ from threading import Thread
 from django.contrib.auth.views import PasswordResetConfirmView
 from all_agent import *
 from django.conf import settings
+from django.shortcuts import get_object_or_404, redirect
 #from django.auth.models import User
 # Create your views here.
 currencies=['SGD', 'MYR', 'EUR', 'USD', 'AUD', 'JPY', 'CNH', 'HKD', 'CAD', 'INR', 'DKK', 'GBP', 'RUB', 'NZD', 'MXN', 'IDR', 'TWD', 'THB', 'VND']
@@ -143,6 +144,11 @@ def create_alert(request):
 
     return render(request, 'create_alert.html')
 
+def remove_agent(request, agent_id):
+    agent = get_object_or_404(Agent, pk=agent_id)
+    agent.delete()
+    return redirect('screen') 
+
 def screen(request):
     return render(request, 'success.html')
 
@@ -232,8 +238,9 @@ def run(request,user_id):
 
 def forgot_password(request):
     if request.method == 'POST':
-        email=request.POST.get('email')
-        send_mail_(email)
+            email = request.POST.get('email')
+            token = str(uuid.uuid4())
+            send_mail_(email , token)
     return render(request,'forgot_password.html')
 
 def password_reset_email(request):
@@ -241,3 +248,5 @@ def password_reset_email(request):
 
 def password_reset_confirm(request):
     return render(request, "password_reset_confirm.html")
+
+

@@ -31,11 +31,12 @@
                                 <a href="#" class="block py-2 pl-3 pr-4 text-white rounded md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 pl-3 pr-4 text-white rounded md:p-0 md:dark:text-blue-500" aria-current="page">Services</a>
-                            </li>
+                                <a href="currency.html" class="block py-2 pl-3 pr-4 text-white rounded md:p-0 md:dark:text-blue-500 currency-converter-link">Currency Converter</a>
+                            </li>                            
                             <li>
-                                <a href="#" class="block py-2 pl-3 pr-4 text-white rounded md:p-0 md:dark:text-blue-500">Pricing</a>
+                                <a href="threshold.html" class="block py-2 pl-3 pr-4 text-white rounded md:p-0 md:dark:text-blue-500 currency-notifier-link">Currency Notifier</a>
                             </li>
+                            
                             <li>
                                 <a href="#" class="block py-2 pl-3 pr-4 text-white rounded md:p-0 md:dark:text-blue-500">Contact</a>
                             </li>
@@ -68,7 +69,7 @@
         <div id="rem_lost">
             <div class="flex items-start">
                 <div class="flex items-center h-5">
-                    <input id="remember" type="checkbox" value="123" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required>
+                    <input id="remember" type="checkbox" value="123" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" >
                     
                 </div>
 
@@ -88,5 +89,33 @@
     <script src="{% static 'js/back.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currencyNotifierLink = document.querySelector('.currency-notifier-link');
+        
+            currencyNotifierLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior (i.e., following the link)
+                alert('You must sign in to access this feature.');
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const currencyNotifierLink = document.querySelector('.currency-converter-link');
+        
+            currencyConveterLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior (i.e., following the link)
+                alert('You must sign in to access this feature.');
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currencyConverterLink = document.querySelector('.currency-converter-link');
+        
+            currencyConverterLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior (i.e., following the link)
+                alert('You must sign in to access this feature.');
+            });
+        });
+    </script>
 </body>
 </html>

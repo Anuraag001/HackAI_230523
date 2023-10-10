@@ -112,3 +112,6 @@ body
     border-bottom: 2px solid white; /* Add a bottom border when focused */
 }
 
+.transparent-input:placeholder {
+    color:white; /* Adjust the color and opacity as needed */
+}
