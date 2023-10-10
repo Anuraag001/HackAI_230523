@@ -57,7 +57,7 @@ def front(request):
             file.close()
             all_agents=User_Agent.objects.filter(user=user)
             for agent in all_agents:
-                check(agent)
+                check(agent,email)
         
             print("user logged in")
             return redirect('currency',user_id=user.id)
@@ -161,7 +161,7 @@ def add_to_bureau(name):
     bureau.add(new_agent)
     return 
 
-def check(agent):
+def check(agent,email):
     
     my_string = f'''
 {agent.name} = Agent(name="{agent.name}", seed="{agent.name} recovery phrase")
@@ -185,7 +185,9 @@ async def say_hello(ctx: Context):
     if ctx.storage.get("present")>ctx.storage.get("max_value") or ctx.storage.get("present")<ctx.storage.get("min_value"):
         ctx.logger.info(f'\\033[91mNot in range\\033[0m')
         if not boolean:
-            send_mail_()
+            agent_mail("{email}","{f'Your agent {agent.name} has found out that the value of {agent.base_currency} has is not in between {agent.min_value}{agent.foreign_currency} and {agent.max_value}{agent.foreign_currency}'}")
+            ctx.logger.info(f'\\033[93mMail sent out of range\\033[0m')
+
             ctx.storage.set("value",True)
             boolean=ctx.storage.get("value")
     else:
@@ -217,8 +219,9 @@ def threshold(request,user_id):
 
         agent=User_Agent.objects.create(user=user,name=name,base_currency=base_currency,min_value=min_amount,max_value=max_amount,foreign_currency=to_currency)
         agent.save()
+        email=User.objects.get(id=user_id)
         #my_thread.start()
-        check(agent)
+        check(agent,email)
         #add_to_bureau(name)
         #add_to_bureau(name)
     all_agents=User_Agent.objects.filter(user=user)
