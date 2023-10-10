@@ -44,6 +44,7 @@ body
     flex-direction: column;
     flex:0 0 40%;
     width: 40%;
+    background-color: white;
 }
 #as
 {
@@ -75,6 +76,9 @@ body
     flex:0 0 100%;
     flex-direction: row;
     justify-content: space-evenly;
+    background-color: white;
+    padding: 10px;
+    border-radius: 30px;
 }
 #main1
 {
@@ -98,7 +102,7 @@ body
     background: transparent; /* Make the background transparent */
     border: none; /* Remove the border on the top, left, and right */
     border-bottom: 2px solid white; /* Add a bottom border */
-    color: white !important; /* Set the text color to white */
+    color:black !important; /* Set the text color to white */
     padding: 10px 0; /* Add padding to center the text vertically */
     outline: none;
     box-shadow: none;
@@ -107,11 +111,18 @@ body
 
 /* Add a background color on focus */
 .transparent-input:focus {
-    background-color: rgb(1, 1, 88); /* Background color when focused */
+    background-color:white; /* Background color when focused */
     border-color:rgb(1, 1, 88);
     border-bottom: 2px solid white; /* Add a bottom border when focused */
 }
 
-.transparent-input:placeholder {
-    color:white; /* Adjust the color and opacity as needed */
+::placeholder
+{
+    color: black;
+}
+#alert
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

@@ -51,3 +51,10 @@ table,th,td,thead,tbody,tr
     flex-direction: row;
     justify-content: center;
 }
+#after_run{
+    display: flex;
+    flex: 0 0 100%;
+    flex-direction: row;
+    justify-content: center;
+    background-color: lightgreen;
+}

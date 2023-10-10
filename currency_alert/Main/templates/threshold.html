@@ -10,6 +10,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles_agent.css' %}">
 </head>
 <body>
+    {% if not boolean %}
+    <div id="after_run"> Agents are runnning please check terminal and if out of range then mail</div>
+    {% endif %}
+    
     <div class="container mt-5" style="background-color: white; padding: 20px;">
         <h1 class="lk" id="qwer">Add a Limit</h1>
         <form method="POST" action="{% url 'threshold' user_id=user_id %}">
@@ -93,9 +97,14 @@
         
     
         <div id="run" class="mt-3">
-            <a href="{% url 'run' user_id=user_id %}">
-                <button type="button" class="btn btn-success">Run</button>
-            </a>
+            <form method="post" action="{% url 'run' user_id=user_id %}">
+                {% csrf_token %}
+                {% if boolean %}
+                    <button type="submit" class="btn btn-success" id="run_btn">Run</button>
+                {% else %}
+                    <button type="submit" class="btn btn-success" id="run_btn" disabled>Run</button>
+                {% endif %}
+            </form>
         </div>
     </div>
     
@@ -133,5 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+<script src="{% static 'js/threshold.js' %}"></script>
 </body>
 </html>

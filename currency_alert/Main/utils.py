@@ -20,5 +20,17 @@ def send_mail_(email,send_message="Password reset"):
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
+def agent_mail(email,send_message):
+    subject = "Currency Alert"
+    message = send_message
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [email]
+    msg = EmailMultiAlternatives(subject, message, from_email, recipient_list)
+    msg.send()
+    
+
+
+
+
 
 
