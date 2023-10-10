@@ -80,7 +80,7 @@ Alerts showing up in the terminal
 - Uagents: https://fetch.ai/docs
 - Django: https://www.djangoproject.com/
 - poetry: https://python-poetry.org/docs/
-- Rapid API: https://www.example.com
+- Rapid API: https://rapidapi.com/hub
 
 ## Contact
 
