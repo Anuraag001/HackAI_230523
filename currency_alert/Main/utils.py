@@ -8,6 +8,10 @@ def send_mail_(email,token):
     message = f'Hi , click on the link to reset your password http://127.0.0.1:8000/change-password/{token}/'
     token = token
     url=f'127.0.0.1:8000/password_reset_confirm/{token}/'
+
+def send_mail_(email,send_message="Password reset"):
+    subject = "Currency Alert"
+    message = send_message
     from_email = settings.EMAIL_HOST_USER
     recipient_list = [email]
     html_template = get_template('password_reset_email.html')
@@ -15,7 +19,6 @@ def send_mail_(email,token):
     msg = EmailMultiAlternatives(subject, message, from_email, recipient_list)  # Use `message` instead of an empty string
     msg.attach_alternative(html_content, "text/html")
     msg.send()
-
 
 
 
