@@ -61,8 +61,19 @@ The Currency Exchange Monitor & Alert Agent is a powerful tool designed to provi
 We welcome contributions! 
 
 ## Just to show some examples of uagents working when the limit set by the user is crossed
-![Image showing the alert sent to your mail when an agent detects that the limits are crossed](https://github.com/Anuraag001/amazon_hackon_r1/blob/master/currency_alert/Main/static/img/scr1.png)
-![Alerts showing up in the terminal](https://github.com/Anuraag001/amazon_hackon_r1/blob/master/currency_alert/Main/static/img/scr2.png)
+
+Image showing the alert sent to your mail when an agent detects that the limits are crossed.
+
+![Image showing the alert sent to your mail when an agent detects that the limits are crossed](./currency_alert/Main/static/img/scr1.png)
+
+
+
+Alerts showing up in the terminal
+
+![Alerts showing up in the terminal](./currency_alert/Main/static/img/sc2.png)
+
+
+
 
 ## Credits
 
