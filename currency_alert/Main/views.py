@@ -1,9 +1,11 @@
+from .models import Customer,Alert,User_Agent
 from django.shortcuts import render,redirect
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
-from .models import Customer,Alert,User_Agent
+
 from .utils import send_mail_
 from uagents import Agent, Context,Bureau
+from django.shortcuts import get_object_or_404, redirect
 import time
 import os
 import fnmatch
@@ -13,7 +15,7 @@ from threading import Thread
 from django.contrib.auth.views import PasswordResetConfirmView
 from all_agent import *
 from django.conf import settings
-from django.shortcuts import get_object_or_404, redirect
+from django.http import JsonResponse
 #from django.auth.models import User
 # Create your views here.
 currencies=['SGD', 'MYR', 'EUR', 'USD', 'AUD', 'JPY', 'CNH', 'HKD', 'CAD', 'INR', 'DKK', 'GBP', 'RUB', 'NZD', 'MXN', 'IDR', 'TWD', 'THB', 'VND']
@@ -145,9 +147,12 @@ def create_alert(request):
     return render(request, 'create_alert.html')
 
 def remove_agent(request, agent_id):
-    agent = get_object_or_404(Agent, pk=agent_id)
-    agent.delete()
-    return redirect('screen') 
+    try:
+        agent = User_Agent.objects.get(pk=agent_id)
+        agent.delete()
+        return JsonResponse({'success': True})
+    except User_Agent.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Agent does not exist'}, status=404)
 
 def screen(request):
     return render(request, 'success.html')
