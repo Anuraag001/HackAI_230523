@@ -17,7 +17,7 @@ from django.shortcuts import get_object_or_404, redirect
 #from django.auth.models import User
 # Create your views here.
 currencies=['SGD', 'MYR', 'EUR', 'USD', 'AUD', 'JPY', 'CNH', 'HKD', 'CAD', 'INR', 'DKK', 'GBP', 'RUB', 'NZD', 'MXN', 'IDR', 'TWD', 'THB', 'VND']
-
+boolean=True
 first_string=f'''from uagents import Agent, Context,Bureau
 import requests
 bureau=Bureau()
@@ -61,6 +61,7 @@ def front(request):
                 check(agent,email)
         
             print("user logged in")
+            boolean=True
             return redirect('currency',user_id=user.id)
     return render(request,"temp.html")
 
@@ -81,6 +82,7 @@ def signup(request):
         with open("all_agent.py", "w") as file:
                 file.write(first_string)
         file.close()
+        boolean=True
         return redirect('currency',user_id=user.id)
     return render(request,"signup.html")
 
@@ -230,14 +232,18 @@ def threshold(request,user_id):
         check(agent,email)
         #add_to_bureau(name)
         #add_to_bureau(name)
+    Boolean=boolean
     all_agents=User_Agent.objects.filter(user=user)
-    return render(request, 'threshold.html',{'user_id': user_id, 'currencies': currencies,'all_agents':all_agents})
+    return render(request, 'threshold.html',{'user_id': user_id, 'currencies': currencies,'all_agents':all_agents,'boolean':Boolean})
 
 def run(request,user_id):
-    print("hi")
-    my_thread.start()
-    print(bureau)
-    return render(request, 'success.html')
+    if request.method == 'POST':
+        my_thread.start()
+        print(bureau)
+    boolean=False
+    user=User.objects.get(id=user_id)
+    all_agents=User_Agent.objects.filter(user=user)
+    return render(request, 'threshold.html',{'user_id': user_id, 'currencies': currencies,'all_agents':all_agents,'boolean':boolean})
 
 def forgot_password(request):
     if request.method == 'POST':
